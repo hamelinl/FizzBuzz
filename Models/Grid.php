@@ -13,7 +13,7 @@ class Grid
         $this->initialize();
     }
 
-    public function initialize()
+    public function initialize(): void
     {
         for ($column = 0; $column < $this->nbColumns; $column++) {
             for ($line = 0; $line < $this->nbLines; $line++) {
@@ -36,27 +36,11 @@ class Grid
     public function getDisplay(): string
     {
 //        return 'red';
-        return "******\n
-        ******\n
-        ******\n
-        ******\n
-        ******\n
-        Y*****";
-    }
-
-    /**
-     * @return array
-     */
-    public function getGrid(): array
-    {
-        return $this->grid;
-    }
-
-    /**
-     * @param array $grid
-     */
-    public function setGrid(array $grid): void
-    {
-        $this->grid = $grid;
+        return ".......\n
+        .......\n
+        .......\n
+        .......\n
+        .......\n
+        Y......";
     }
 }
