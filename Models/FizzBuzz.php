@@ -5,6 +5,6 @@ class FizzBuzz
 {
     public function getResult(): string
     {
-        return '0';
+        return '1';
     }
 }
