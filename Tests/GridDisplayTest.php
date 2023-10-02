@@ -16,11 +16,11 @@ class GridDisplayTest extends TestCase
 
     public function testDisplayGridWith()
     {
-        $this->assertSame("******\n
-        ******\n
-        ******\n
-        ******\n
-        ******\n
-        Y*****", $this->grid->getDisplay());
+        $this->assertSame(".......\n
+        .......\n
+        .......\n
+        .......\n
+        .......\n
+        .......", $this->grid->getDisplay());
     }
 }

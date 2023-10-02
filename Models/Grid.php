@@ -24,7 +24,12 @@ class Grid
 
     public function addJeton(int $column, string $color): void
     {
-        $this->grid[$column][0] = $color;
+        for ($line = 0; $line < $this->nbColumns; $line++) {
+            if ($this->grid[$column][$line] === null) {
+                $this->grid[$column][$line] = $color;
+                break;
+            }
+        }
     }
 
     public function getState(int $column, int $line): ?string
