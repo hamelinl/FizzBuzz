@@ -58,6 +58,34 @@ class GridStateTest extends TestCase
         $this->assertSame($color2, $result2);
     }
 
+    public function testResetGrid(){
+        // GIVEN
+        $this->grid->addJeton(1, 'red');
+        $this->grid->addJeton(5, 'yellow');
+        $this->grid->initialize();
+        // WHEN
+        $result1 = $this->grid->getState(1, 0);
+        $result2 = $this->grid->getState(5, 0);
+        // THEN
+        $this->assertSame(null, $result1);
+        $this->assertSame(null, $result2);
+
+    }
+
+    public function testAddSevenJetonOnSameColumn(){
+        // GIVEN
+        $this->grid->addJeton(1, 'red');
+        $this->grid->addJeton(1, 'yellow');
+        $this->grid->addJeton(1, 'red');
+        $this->grid->addJeton(1, 'yellow');
+        $this->grid->addJeton(1, 'yellow');
+        $this->grid->addJeton(1, 'yellow');
+        // WHEN
+        // THEN
+        $this->expectException(Exception::class);
+        $this->grid->addJeton(1, 'red');
+    }
+
 //    public function testDisplayGridWith()
 //    {
 //        $this->assertSame(".......\n

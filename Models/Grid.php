@@ -24,6 +24,10 @@ class Grid
 
     public function addJeton(int $column, string $color): void
     {
+        if(!is_null($this->grid[$column][$this->nbLines-1])){
+            throw new \Exception('Column is full');
+        }
+
         for ($line = 0; $line < $this->nbColumns; $line++) {
             if ($this->grid[$column][$line] === null) {
                 $this->grid[$column][$line] = $color;
