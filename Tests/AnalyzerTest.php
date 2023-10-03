@@ -24,7 +24,7 @@ class AnalyzerTest extends TestCase
         $this->grid->addJeton(0, 'R');
         $this->grid->addJeton(0, 'R');
         // WHEN
-        $result = $this->analyzer->isFourJetonOfSameColorInColumn(0);
+        $result = $this->analyzer->isWinner();
         // THEN
         $this->assertTrue($result);
     }

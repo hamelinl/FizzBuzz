@@ -11,7 +11,7 @@ class Analyzer
         $this->grid = $grid;
     }
 
-    public function isFourJetonOfSameColorInColumn(int $columnNumber)
+    public function isWinner()
     {
         return true;
     }
