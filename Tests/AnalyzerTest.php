@@ -9,6 +9,15 @@ class AnalyzerTest extends TestCase
     private Grid $grid;
     private Analyzer $analyzer;
 
+    private function initGridWithArray(Array $array){
+        $this->grid = new Grid();
+        foreach (array_reverse($array) as $keyLine => $line) {
+            foreach ($line as $keyColumn => $color) {
+                if ($color) $this->grid->addJeton($keyColumn, $color);
+            }
+        }
+    }
+
     public function testShouldReturnFalseIfGridEmpty()
     {
         // GIVEN
@@ -21,11 +30,15 @@ class AnalyzerTest extends TestCase
     public function testShouldReturnTrueIfThereIsFourJetonOfSameColorInColumn()
     {
         // GIVEN
-        $this->grid = new Grid();
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'R');
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => ['R', null, null, null, null, null, null],
+            2 => ['R', null, null, null, null, null, null],
+            1 => ['R', null, null, null, null, null, null],
+            0 => ['R', null, null, null, null, null, null]
+        ];
+        $this->initGridWithArray($gridArray);
         // WHEN
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
@@ -35,25 +48,33 @@ class AnalyzerTest extends TestCase
     public function testShouldReturnFalseIfThereIsThreeJetonOfSameColorInColumn()
     {
         // GIVEN
-        $this->grid = new Grid();
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'R');
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, null, null, null],
+            2 => ['R', null, null, null, null, null, null],
+            1 => ['R', null, null, null, null, null, null],
+            0 => ['R', null, null, null, null, null, null]
+        ];
+        $this->initGridWithArray($gridArray);
         // WHEN
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
         $this->assertFalse($result);
     }
 
-    public function testShouldReturnFalseIfThereIsOneJetonOfAnotherColorBetweenFourJetonsOfSameColor()
+    public function testShouldReturnFalseIfThereIsOneJetonOfAnotherColorBetweenFourJetonsOfSameColorInColumn()
     {
         // GIVEN
-        $this->grid = new Grid();
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'Y');
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'R');
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => ['R', null, null, null, null, null, null],
+            3 => ['R', null, null, null, null, null, null],
+            2 => ['Y', null, null, null, null, null, null],
+            1 => ['R', null, null, null, null, null, null],
+            0 => ['R', null, null, null, null, null, null]
+        ];
+        $this->initGridWithArray($gridArray);
         // WHEN
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
@@ -63,11 +84,15 @@ class AnalyzerTest extends TestCase
     public function testShouldReturnFalseIfThereIsTwoJetonOfSameColorInColumnZeroAndOne()
     {
         // GIVEN
-        $this->grid = new Grid();
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(1, 'Y');
-        $this->grid->addJeton(1, 'Y');
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, null, null, null],
+            2 => [null, null, null, null, null, null, null],
+            1 => ['R', 'Y', null, null, null, null, null],
+            0 => ['R', 'Y', null, null, null, null, null]
+        ];
+        $this->initGridWithArray($gridArray);
         // WHEN
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
@@ -77,11 +102,15 @@ class AnalyzerTest extends TestCase
     public function testShouldReturnTrueIfThereIsFourYellowJetonInColumnOne()
     {
         // GIVEN
-        $this->grid = new Grid();
-        $this->grid->addJeton(1, 'Y');
-        $this->grid->addJeton(1, 'Y');
-        $this->grid->addJeton(1, 'Y');
-        $this->grid->addJeton(1, 'Y');
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, 'Y', null, null, null, null, null],
+            2 => [null, 'Y', null, null, null, null, null],
+            1 => [null, 'Y', null, null, null, null, null],
+            0 => [null, 'Y', null, null, null, null, null]
+        ];
+        $this->initGridWithArray($gridArray);
         // WHEN
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
@@ -91,11 +120,15 @@ class AnalyzerTest extends TestCase
     public function testShouldReturnTrueIfThereIsFourJetonOfSameColorInLine()
     {
         // GIVEN
-        $this->grid = new Grid();
-        $this->grid->addJeton(0, 'R');
-        $this->grid->addJeton(1, 'R');
-        $this->grid->addJeton(2, 'R');
-        $this->grid->addJeton(3, 'R');
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, null, null, null],
+            2 => [null, null, null, null, null, null, null],
+            1 => [null, null, null, null, null, null, null],
+            0 => ['R', 'R', 'R', 'R', null, null, null]
+        ];
+        $this->initGridWithArray($gridArray);
         // WHEN
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
@@ -105,10 +138,15 @@ class AnalyzerTest extends TestCase
     public function testShouldReturnFalseIfThereIsThreeJetonOfSameColorInLine()
     {
         // GIVEN
-        $this->grid = new Grid();
-        $this->grid->addJeton(2, 'Y');
-        $this->grid->addJeton(3, 'Y');
-        $this->grid->addJeton(4, 'Y');
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, null, null, null],
+            2 => [null, null, null, null, null, null, null],
+            1 => [null, null, null, null, null, null, null],
+            0 => [null, null, 'Y', 'Y', 'Y', null, null]
+        ];
+        $this->initGridWithArray($gridArray);
         // WHEN
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
@@ -118,11 +156,69 @@ class AnalyzerTest extends TestCase
     public function testShouldReturnTrueIfThereIsFourJetonOfSameColorInLineStartInColumnTwo()
     {
         // GIVEN
-        $this->grid = new Grid();
-        $this->grid->addJeton(2, 'Y');
-        $this->grid->addJeton(3, 'Y');
-        $this->grid->addJeton(4, 'Y');
-        $this->grid->addJeton(5, 'Y');
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, null, null, null],
+            2 => [null, null, null, null, null, null, null],
+            1 => [null, null, null, null, null, null, null],
+            0 => [null, null, 'Y', 'Y', 'Y', 'Y', null]
+        ];
+        $this->initGridWithArray($gridArray);
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertTrue($result);
+    }
+
+    public function testShouldReturnFalseIfThereIsOneJetonOfAnotherColorBetweenFourJetonsOfSameColorInLine()
+    {
+        // GIVEN
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, null, null, null],
+            2 => [null, null, null, null, null, null, null],
+            1 => [null, null, null, null, null, null, null],
+            0 => [null, null, 'Y', 'Y', 'R', 'Y', 'Y']
+        ];
+        $this->initGridWithArray($gridArray);
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertFalse($result);
+    }
+
+    public function testShouldReturnTrueIfThereIsFourJetonOfSameColorConsecutiveInLineOne()
+    {
+        // GIVEN
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, null, null, null],
+            2 => [null, null, null, null, null, null, null],
+            1 => [null, null, 'R', 'R', 'R', 'R', null],
+            0 => [null, null, 'R', 'R', 'Y', 'R', null]
+        ];
+        $this->initGridWithArray($gridArray);
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertTrue($result);
+    }
+
+    public function testShouldReturnTrueIfThereIsFourJetonOfSameColorConsecutiveInLineFive()
+    {
+        // GIVEN
+        $gridArray = [
+            5 => [null, null, 'R', 'R', 'R', 'R', null],
+            4 => [null, null, 'R', 'R', 'Y', 'Y', null],
+            3 => [null, null, 'Y', 'R', 'Y', 'R', null],
+            2 => [null, null, 'R', 'Y', 'Y', 'R', null],
+            1 => [null, null, 'R', 'R', 'R', 'Y', null],
+            0 => [null, null, 'R', 'R', 'Y', 'R', null]
+        ];
+        $this->initGridWithArray($gridArray);
         // WHEN
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
