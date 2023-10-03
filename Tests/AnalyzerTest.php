@@ -114,4 +114,18 @@ class AnalyzerTest extends TestCase
         // THEN
         $this->assertFalse($result);
     }
+
+    public function testShouldReturnTrueIfThereIsFourJetonOfSameColorInLineStartInColumnTwo()
+    {
+        // GIVEN
+        $this->grid = new Grid();
+        $this->grid->addJeton(2, 'Y');
+        $this->grid->addJeton(3, 'Y');
+        $this->grid->addJeton(4, 'Y');
+        $this->grid->addJeton(5, 'Y');
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertTrue($result);
+    }
 }

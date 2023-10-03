@@ -13,11 +13,16 @@ class Analyzer
 
     public function isWinner()
     {
-        if($this->grid->getState(0, 0)
+        if(($this->grid->getState(0, 0)
             && $this->grid->getState(1, 0)
             && $this->grid->getState(2, 0)
             && $this->grid->getState(3, 0))
+            || ($this->grid->getState(2, 0)
+            && $this->grid->getState(3, 0)
+            && $this->grid->getState(4, 0)
+            && $this->grid->getState(5, 0)))
             return true;
+
 
         if($this->isColumnWinner()) return true;
 
