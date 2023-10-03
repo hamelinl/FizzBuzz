@@ -9,6 +9,15 @@ class AnalyzerTest extends TestCase
     private Grid $grid;
     private Analyzer $analyzer;
 
+    public function testShouldReturnFalseIfGridEmpty()
+    {
+        // GIVEN
+        $this->grid = new Grid();
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertFalse($result);
+    }
     public function testShouldReturnTrueIfThereIsFourJetonOfSameColorInColumn()
     {
         // GIVEN
@@ -23,17 +32,7 @@ class AnalyzerTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testShouldReturnFalseIfGridEmpty()
-    {
-        // GIVEN
-        $this->grid = new Grid();
-        // WHEN
-        $result = (new Analyzer($this->grid))->isWinner();
-        // THEN
-        $this->assertFalse($result);
-    }
-
-    public function testShouldReturnFalseIfThereIsThreeJetonOfSameColorInColumnStartInFirstLine()
+    public function testShouldReturnFalseIfThereIsThreeJetonOfSameColorInColumn()
     {
         // GIVEN
         $this->grid = new Grid();
@@ -101,5 +100,18 @@ class AnalyzerTest extends TestCase
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
         $this->assertTrue($result);
+    }
+
+    public function testShouldReturnFalseIfThereIsThreeJetonOfSameColorInLine()
+    {
+        // GIVEN
+        $this->grid = new Grid();
+        $this->grid->addJeton(2, 'Y');
+        $this->grid->addJeton(3, 'Y');
+        $this->grid->addJeton(4, 'Y');
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertFalse($result);
     }
 }
