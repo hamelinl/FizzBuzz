@@ -13,11 +13,23 @@ class Analyzer
 
     public function isWinner()
     {
-        if($this->grid->getState(0,0)
-            && $this->grid->getState(0,1)
-            && $this->grid->getState(0,2)
-            && $this->grid->getState(0,3)){
-            return true;
+        $lastToken = null;
+        $countToken = 0;
+
+        for($line = 0; $line < 6; $line++){
+            if(!is_null($this->grid->getState(0, $line))){
+                if($this->grid->getState(0, $line) !== $lastToken) {
+                    $lastToken = $this->grid->getState(0, $line);
+                    $countToken = 1;
+                }
+                else{
+                    $countToken++;
+
+                    if($countToken == 4){
+                        return true;
+                    }
+                }
+            }
         }
 
         return false;
