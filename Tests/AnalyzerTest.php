@@ -45,4 +45,61 @@ class AnalyzerTest extends TestCase
         // THEN
         $this->assertFalse($result);
     }
+
+    public function testShouldReturnFalseIfThereIsOneJetonOfAnotherColorBetweenFourJetonsOfSameColor()
+    {
+        // GIVEN
+        $this->grid = new Grid();
+        $this->grid->addJeton(0, 'R');
+        $this->grid->addJeton(0, 'R');
+        $this->grid->addJeton(0, 'Y');
+        $this->grid->addJeton(0, 'R');
+        $this->grid->addJeton(0, 'R');
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertFalse($result);
+    }
+
+    public function testShouldReturnFalseIfThereIsTwoJetonOfSameColorInColumnZeroAndOne()
+    {
+        // GIVEN
+        $this->grid = new Grid();
+        $this->grid->addJeton(0, 'R');
+        $this->grid->addJeton(0, 'R');
+        $this->grid->addJeton(1, 'Y');
+        $this->grid->addJeton(1, 'Y');
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertFalse($result);
+    }
+
+    public function testShouldReturnTrueIfThereIsFourYellowJetonInColumnOne()
+    {
+        // GIVEN
+        $this->grid = new Grid();
+        $this->grid->addJeton(1, 'Y');
+        $this->grid->addJeton(1, 'Y');
+        $this->grid->addJeton(1, 'Y');
+        $this->grid->addJeton(1, 'Y');
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertTrue($result);
+    }
+
+    public function testShouldReturnTrueIfThereIsFourJetonOfSameColorInLine()
+    {
+        // GIVEN
+        $this->grid = new Grid();
+        $this->grid->addJeton(0, 'R');
+        $this->grid->addJeton(1, 'R');
+        $this->grid->addJeton(2, 'R');
+        $this->grid->addJeton(3, 'R');
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertTrue($result);
+    }
 }

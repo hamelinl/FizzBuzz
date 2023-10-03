@@ -13,20 +13,34 @@ class Analyzer
 
     public function isWinner()
     {
-        $lastToken = null;
-        $countToken = 0;
+        if($this->grid->getState(0, 0)
+            && $this->grid->getState(1, 0)
+            && $this->grid->getState(2, 0)
+            && $this->grid->getState(3, 0))
+            return true;
 
-        for($line = 0; $line < 6; $line++){
-            if(!is_null($this->grid->getState(0, $line))){
-                if($this->grid->getState(0, $line) !== $lastToken) {
-                    $lastToken = $this->grid->getState(0, $line);
-                    $countToken = 1;
-                }
-                else{
-                    $countToken++;
+        if($this->isColumnWinner()) return true;
 
-                    if($countToken == 4){
-                        return true;
+        return false;
+    }
+
+    private function isColumnWinner(){
+
+        for($column = 0; $column < 7; $column++) {
+            $lastToken = null;
+            $countToken = 0;
+
+            for ($line = 0; $line < 6; $line++) {
+                if (!is_null($this->grid->getState($column, $line))) {
+                    if ($this->grid->getState($column, $line) !== $lastToken) {
+                        $lastToken = $this->grid->getState($column, $line);
+                        $countToken = 1;
+                    } else {
+                        $countToken++;
+
+                        if ($countToken == 4) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -34,6 +48,5 @@ class Analyzer
 
         return false;
     }
-
 
 }
