@@ -13,7 +13,9 @@ class Analyzer
 
     public function isWinner()
     {
-        return true;
+        if($this->grid->getState(0,0))
+            return true;
+        return false;
     }
 
 
