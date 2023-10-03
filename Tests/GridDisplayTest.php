@@ -16,11 +16,15 @@ class GridDisplayTest extends TestCase
 
     public function testDisplayGridWith()
     {
-        $this->assertSame(".......\n
-        .......\n
-        .......\n
-        .......\n
-        .......\n
-        .......", $this->grid->getDisplay());
+        // GIVEN
+        $this->grid->addJeton(0, 'R');
+        $this->grid->addJeton(0, 'Y');
+        $this->grid->addJeton(2, 'R');
+        $this->grid->addJeton(4, 'R');
+        $this->grid->addJeton(4, 'Y');
+        $this->grid->addJeton(4, 'R');
+
+        // THEN
+        $this->assertSame(".......\n.......\n.......\n....R..\nY...Y..\nR.R.R..", $this->grid->getDisplay());
     }
 }

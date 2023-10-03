@@ -16,10 +16,10 @@ class GridStateTest extends TestCase
 
     public static function dataProviderColor(): Generator
     {
-        yield [0, 'red'];
-        yield [1, 'yellow'];
-        yield [2, 'yellow'];
-        yield [5, 'red'];
+        yield [0, 'R'];
+        yield [1, 'Y'];
+        yield [2, 'Y'];
+        yield [5, 'R'];
     }
 
     /**
@@ -37,9 +37,9 @@ class GridStateTest extends TestCase
 
     public static function dataProviderTwoColorsInSameColumn(): Generator
     {
-        yield [3, 'red', 'yellow'];
-        yield [4, 'yellow', 'yellow'];
-        yield [6, 'yellow', 'red'];
+        yield [3, 'R', 'Y'];
+        yield [4, 'Y', 'Y'];
+        yield [6, 'Y', 'R'];
     }
 
     /**
@@ -60,8 +60,8 @@ class GridStateTest extends TestCase
 
     public function testResetGrid(){
         // GIVEN
-        $this->grid->addJeton(1, 'red');
-        $this->grid->addJeton(5, 'yellow');
+        $this->grid->addJeton(1, 'R');
+        $this->grid->addJeton(5, 'Y');
         $this->grid->initialize();
         // WHEN
         $result1 = $this->grid->getState(1, 0);
@@ -74,32 +74,15 @@ class GridStateTest extends TestCase
 
     public function testAddSevenJetonOnSameColumn(){
         // GIVEN
-        $this->grid->addJeton(1, 'red');
-        $this->grid->addJeton(1, 'yellow');
-        $this->grid->addJeton(1, 'red');
-        $this->grid->addJeton(1, 'yellow');
-        $this->grid->addJeton(1, 'yellow');
-        $this->grid->addJeton(1, 'yellow');
+        $this->grid->addJeton(1, 'R');
+        $this->grid->addJeton(1, 'Y');
+        $this->grid->addJeton(1, 'R');
+        $this->grid->addJeton(1, 'Y');
+        $this->grid->addJeton(1, 'Y');
+        $this->grid->addJeton(1, 'Y');
         // WHEN
         // THEN
         $this->expectException(Exception::class);
-        $this->grid->addJeton(1, 'red');
+        $this->grid->addJeton(1, 'R');
     }
-
-//    public function testDisplayGridWith()
-//    {
-//        $this->assertSame(".......\n
-//        .......\n
-//        .......\n
-//        .......\n
-//        .......\n
-//        .......", $this->grid->getDisplay());
-//    }
-//
-//    public function testReset()
-//    {
-//        $this->grid->addJeton(1, 'red');
-//        $this->grid->initialize();
-//        $this->assertSame();
-//    }
 }

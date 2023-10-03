@@ -44,12 +44,20 @@ class Grid
 
     public function getDisplay(): string
     {
-//        return 'red';
-        return ".......\n
-        .......\n
-        .......\n
-        .......\n
-        .......\n
-        Y......";
+        $displayReturn = '';
+
+        for ($line = $this->nbLines-1; $line >=0; $line--) {
+            for ($column = 0; $column < $this->nbColumns; $column++) {
+                if(is_null($this->getState($column, $line)))
+                    $displayReturn .= '.';
+                else
+                    $displayReturn .= $this->getState($column, $line);
+            }
+
+            if($line !== 0)
+                $displayReturn .= "\n";
+        }
+
+        return $displayReturn;
     }
 }
