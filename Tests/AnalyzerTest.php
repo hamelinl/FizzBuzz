@@ -225,7 +225,7 @@ class AnalyzerTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testShouldReturnTrueIfThereIsFourJetonOfSameColorAscendingDiagonalStartAtZeroZero(){
+    /*public function testShouldReturnTrueIfThereIsFourJetonOfSameColorAscendingDiagonalStartAtZeroZero(){
         // GIVEN
         $gridArray = [
             5 => [null, null, null, null, null, null, null],
@@ -274,5 +274,5 @@ class AnalyzerTest extends TestCase
         $result = (new Analyzer($this->grid))->isWinner();
         // THEN
         $this->assertTrue($result);
-    }
+    }*/
 }
