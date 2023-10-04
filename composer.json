@@ -1,7 +1,9 @@
 {
     "autoload": {
         "psr-4": {
-            "Models\\": "Models/"
+            "Models\\": "Models/",
+            "Interfaces\\": "Interfaces/",
+            "MockStub\\": "MockStub/"
         }
     },
     "require": {

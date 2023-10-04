@@ -2,7 +2,9 @@
 
 namespace Models;
 
-class Analyzer
+use Interfaces\AnalyzerInterface;
+
+class Analyzer implements AnalyzerInterface
 {
     private Grid $grid;
 
@@ -13,14 +15,14 @@ class Analyzer
 
     public function isWinner()
     {
-        for($column=0; $column<4;$column++){
+        /*for($column=0; $column<4;$column++){
             if($this->grid->getState($column, 0)
                 && $this->grid->getState($column+1, 1) === $this->grid->getState(0, 0)
                 && $this->grid->getState($column+2, 2) === $this->grid->getState(0, 0)
                 && $this->grid->getState(3, 3) === $this->grid->getState(0, 0)) {
                 return true;
             }
-        }
+        }*/
         /*if($this->grid->getState(0, 0)
             && $this->grid->getState(1, 1) === $this->grid->getState(0, 0)
             && $this->grid->getState(2, 2) === $this->grid->getState(0, 0)
@@ -44,6 +46,12 @@ class Analyzer
         if($this->isColumnWinner() || $this->isLineWinner()) return true;
 
         return false;
+    }
+
+    public function noWinner(): string
+    {
+        // TODO: Implement noWinner() method.
+        return '';
     }
 
     private function isColumnWinner(){

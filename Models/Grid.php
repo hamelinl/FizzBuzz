@@ -2,7 +2,9 @@
 
 namespace Models;
 
-class Grid
+use Interfaces\GridInterface;
+
+class Grid implements GridInterface
 {
     private array $grid;
     private int $nbColumns = 7;
