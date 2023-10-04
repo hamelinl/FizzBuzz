@@ -17,27 +17,26 @@ class BasketHarryPotter
             return count($array) * $this->price;
         } elseif ($countUnique > 1) {
             if ($countUnique === $countBooks) {
-                switch ($countUnique) {
-                    case 2:
-                        return $this->price * 2 * 0.95;
-                    case 3:
-                        return $this->price * 3 * 0.90;
-                }
+                return $this->getPriceWithUniqueBook($countUnique);
             } else {
                 $divergeBook = $countBooks - $countUnique;
                 if ($divergeBook === 1) {
-                    switch ($countUnique) {
-                        case 2:
-                            return $this->price + $this->price * 2 * 0.95;
-                        case 3:
-                            return $this->price + $this->price * 3 * 0.90;
-                        case 4:
-                            return $this->price + $this->price * 4 * 0.80;
-                    }
+                    return $this->getPriceWithUniqueBook($countUnique, true);
                 }
             }
         }
 
         return 0;
+    }
+
+    public function getPriceWithUniqueBook(int $unique, bool $double = false) {
+        switch ($unique) {
+            case 2:
+                return $double === true ? $this->price + $this->price * 2 * 0.95 : $this->price * 2 * 0.95;
+            case 3:
+                return $double === true ? $this->price + $this->price * 3 * 0.90 : $this->price * 3 * 0.90;
+            case 4:
+                return $double === true ? $this->price + $this->price * 4 * 0.80 : $this->price * 4 * 0.80;
+        }
     }
 }
