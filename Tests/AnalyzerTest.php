@@ -224,4 +224,55 @@ class AnalyzerTest extends TestCase
         // THEN
         $this->assertTrue($result);
     }
+
+    public function testShouldReturnTrueIfThereIsFourJetonOfSameColorAscendingDiagonalStartAtZeroZero(){
+        // GIVEN
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, 'R', null, null, null],
+            2 => [null, null, 'R', 'Y', null, null, null],
+            1 => [null, 'R', 'Y', 'Y', null, null, null],
+            0 => ['R', 'Y', 'Y', 'Y', null, null, null]
+        ];
+        $this->initGridWithArray($gridArray);
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertTrue($result);
+    }
+
+    public function testShouldReturnTrueIfThereIsFourJetonOfSameColorAscendingDiagonalStartAtOneZero(){
+        // GIVEN
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, 'R', null, null],
+            2 => [null, null, null, 'R', 'Y', null, null],
+            1 => [null, null, 'R', 'Y', 'Y', null, null],
+            0 => [null, 'R', 'Y', 'Y', 'Y', null, null]
+        ];
+        $this->initGridWithArray($gridArray);
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertTrue($result);
+    }
+
+    public function testShouldReturnTrueIfThereIsFourJetonOfSameColorAscendingDiagonalStartAtThreeZero(){
+        // GIVEN
+        $gridArray = [
+            5 => [null, null, null, null, null, null, null],
+            4 => [null, null, null, null, null, null, null],
+            3 => [null, null, null, null, null, null, 'R'],
+            2 => [null, null, null, null, null, 'R', 'Y'],
+            1 => [null, null, null, null, 'R', 'Y', 'Y'],
+            0 => [null, null, null, 'R', 'Y', 'Y', 'Y']
+        ];
+        $this->initGridWithArray($gridArray);
+        // WHEN
+        $result = (new Analyzer($this->grid))->isWinner();
+        // THEN
+        $this->assertTrue($result);
+    }
 }

@@ -13,31 +13,35 @@ class Analyzer
 
     public function isWinner()
     {
-
-        for($column = 0; $column < 5; $column++){
+        for($column=0; $column<4;$column++){
             if($this->grid->getState($column, 0)
-            && $this->grid->getState($column+1, 0) === $this->grid->getState($column, 0)
-            && $this->grid->getState($column+2, 0) === $this->grid->getState($column, 0)
-            && $this->grid->getState($column+3, 0) === $this->grid->getState($column, 0)){
-                var_dump('ici');
-                var_dump($column);
-                var_dump($this->grid->getState($column, 0));
-                var_dump($this->grid->getState($column+1, 0));
-                var_dump($this->grid->getState($column+2, 0));
-                var_dump($this->grid->getState($column+3, 0));
-                //var_dump($this->grid);
-
-                return true;
-            }
-            if($this->grid->getState($column, 1)
-                && $this->grid->getState($column+1, 1) === $this->grid->getState($column, 1)
-                && $this->grid->getState($column+2, 1) === $this->grid->getState($column, 1)
-                && $this->grid->getState($column+3, 1) === $this->grid->getState($column, 1)){
+                && $this->grid->getState($column+1, 1) === $this->grid->getState(0, 0)
+                && $this->grid->getState($column+2, 2) === $this->grid->getState(0, 0)
+                && $this->grid->getState(3, 3) === $this->grid->getState(0, 0)) {
                 return true;
             }
         }
+        /*if($this->grid->getState(0, 0)
+            && $this->grid->getState(1, 1) === $this->grid->getState(0, 0)
+            && $this->grid->getState(2, 2) === $this->grid->getState(0, 0)
+            && $this->grid->getState(3, 3) === $this->grid->getState(0, 0)){
+            return true;
+        }
+        if($this->grid->getState(1, 0)
+            && $this->grid->getState(2, 1) === $this->grid->getState(1, 0)
+            && $this->grid->getState(3, 2) === $this->grid->getState(1, 0)
+            && $this->grid->getState(4, 3) === $this->grid->getState(1, 0)){
+            return true;
+        }
 
-        if($this->isColumnWinner()) return true;
+        if($this->grid->getState(3, 0)
+            && $this->grid->getState(4, 1) === $this->grid->getState(3, 0)
+            && $this->grid->getState(5, 2) === $this->grid->getState(3, 0)
+            && $this->grid->getState(6, 3) === $this->grid->getState(3, 0)){
+            return true;
+        }*/
+
+        if($this->isColumnWinner() || $this->isLineWinner()) return true;
 
         return false;
     }
@@ -67,4 +71,18 @@ class Analyzer
         return false;
     }
 
+    private function isLineWinner()
+    {
+        for ($line = 0; $line < 6; $line++) {
+            for($column = 0; $column < 5; $column++){
+                if($this->grid->getState($column, $line)
+                    && $this->grid->getState($column+1, $line) === $this->grid->getState($column, $line)
+                    && $this->grid->getState($column+2, $line) === $this->grid->getState($column, $line)
+                    && $this->grid->getState($column+3, $line) === $this->grid->getState($column, $line)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
