@@ -22,6 +22,8 @@ class BasketHarryPotter
                 $divergeBook = $countBooks - $countUnique;
                 if ($divergeBook === 1) {
                     return $this->getPriceWithUniqueBook($countUnique, true);
+                } else {
+                    return 2 * $this->getPriceWithUniqueBook($countUnique);
                 }
             }
         }
@@ -29,14 +31,14 @@ class BasketHarryPotter
         return 0;
     }
 
-    public function getPriceWithUniqueBook(int $unique, bool $double = false) {
-        switch ($unique) {
-            case 2:
-                return $double === true ? $this->price + $this->price * 2 * 0.95 : $this->price * 2 * 0.95;
-            case 3:
-                return $double === true ? $this->price + $this->price * 3 * 0.90 : $this->price * 3 * 0.90;
-            case 4:
-                return $double === true ? $this->price + $this->price * 4 * 0.80 : $this->price * 4 * 0.80;
-        }
+    public function getPriceWithUniqueBook(int $unique, bool $double = false): int|float
+    {
+        return match ($unique) {
+            2 => $double === true ? $this->price + $this->price * 2 * 0.95 : $this->price * 2 * 0.95,
+            3 => $double === true ? $this->price + $this->price * 3 * 0.90 : $this->price * 3 * 0.90,
+            4 => $double === true ? $this->price + $this->price * 4 * 0.80 : $this->price * 4 * 0.80,
+            5 => $double === true ? $this->price + $this->price * 5 * 0.75 : $this->price * 5 * 0.75,
+            default => 0,
+        };
     }
 }
